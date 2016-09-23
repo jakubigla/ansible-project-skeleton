@@ -1,0 +1,8 @@
+- name: Provision Vagrant box for running deployment script
+  hosts: ansibleskeleton
+  become: True
+  remote_user: "{{ remote_user }}"
+  gather_facts: True
+  roles:
+    - geerlingguy.ansible
+    - aws_credentials

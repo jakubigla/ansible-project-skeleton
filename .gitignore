@@ -1,0 +1,4 @@
+*.retry
+.vagrant
+roles/external/*
+!.gitkeep

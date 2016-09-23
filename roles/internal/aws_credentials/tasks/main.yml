@@ -1,0 +1,21 @@
+- name: Install prerequirements
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - software-properties-common
+
+- name: Install PIP
+  easy_install:
+    name: pip
+    state: present
+
+- name: Install Python packages
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - boto
+
+- name: Copy boto config template
+  template: src=boto.j2 dest="/home/vagrant/.boto" owner={{ remote_user }} group={{ remote_user }}
