@@ -1,0 +1,6 @@
+vpc_class: "10.0"
+vpc_cidr: "{{ vpc_class }}.0.0/16"
+vpc_region: "eu-central-1" #EU (Frankfurt)
+vpc_az_a: "{{ vpc_region }}a"
+vpc_az_b: "{{ vpc_region }}b"
+vpc_dns_zone: "{{ namespace }}.aws"

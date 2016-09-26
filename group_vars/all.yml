@@ -1,1 +1,7 @@
-remote_user: vagrant
+###############################
+
+project_name: "Infra"
+
+###############################
+
+namespace: "{{ env }}.{{ project_name|lower}}"

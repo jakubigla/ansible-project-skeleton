@@ -1,0 +1,6 @@
+dockergc: {
+  repo: "https://github.com/spotify/docker-gc.git",
+  checkout_path: "/root",
+  dest_path: "{{ dockergc.checkout_path }}/dockergc",
+  log_file: "/var/log/docker-gc.log"
+}

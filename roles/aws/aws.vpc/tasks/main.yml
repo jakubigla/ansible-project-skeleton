@@ -1,0 +1,40 @@
+- name: Create VPC network
+  ec2_vpc:
+    region: "{{ vpc_region }}"
+    state:  present
+    resource_tags: { "Name":"{{ namespace }}.vpc", "Environment":"{{ env }}" }
+    internet_gateway: yes
+    cidr_block: "{{ vpc_cidr }}"
+    subnets: "{{ vpc_subnets }}"
+  register: vpc
+
+- name: Tag the Internet Gateway
+  ec2_tag:
+    resource: "{{ vpc.igw_id }}"
+    region: "{{ vpc_region }}"
+    state: present
+    tags:
+      Name: "{{ namespace }}.igw"
+      Environment: "{{ env }}"
+  register: igw
+
+- name: Set up Public Subnets Route Table
+  ec2_vpc_route_table:
+    vpc_id: "{{ vpc.vpc_id }}"
+    region: "{{ vpc_region }}"
+    state: present
+    tags:
+      Name: "{{ namespace }}.public-rt"
+    subnets: "{{ vpc.subnets | get_public_subnets_ids('Type','Public') }}"
+    routes:
+     - dest: 0.0.0.0/0
+       gateway_id: "{{ vpc.igw_id }}"
+  register: public_rtb
+
+- name: Create private DNS zone
+  route53_zone:
+    vpc_id: "{{ vpc.vpc_id }}"
+    vpc_region: "{{ vpc_region }}"
+    zone: "{{ vpc_dns_zone }}"
+    state: present
+  register: vpc_zone

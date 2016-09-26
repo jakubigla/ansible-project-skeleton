@@ -1,0 +1,27 @@
+- name: Install prerequirments
+  apt:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - git
+    - devscripts
+    - debhelper
+    - build-essential
+    - dh-make
+
+- name: Clone repo
+  git:
+    repo: "{{ dockergc.repo }}"
+    dest: "{{ dockergc.dest_path }}"
+
+- name: Build docker-gc
+  shell: "cd {{ dockergc.dest_path }} && debuild -us -uc -b"
+
+- name: Install
+  shell: "dpkg -i {{ dockergc.checkout_path }}/docker-gc_0.1.0_all.deb"
+
+- name: Setup cron
+  template:
+    src: docker-gc.j2
+    dest: /etc/cron.daily/dockergc
+    mode: 0755

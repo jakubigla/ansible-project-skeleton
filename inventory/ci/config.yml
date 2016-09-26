@@ -1,0 +1,5 @@
+[aws_builder]
+127.0.0.1
+
+[all:vars]
+env=ci

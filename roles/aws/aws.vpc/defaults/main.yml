@@ -1,0 +1,33 @@
+vpc_subnets:
+    #Public Subnet 1
+  - cidr: "{{ vpc_class }}.0.0/24"
+    az: "{{ vpc_az_a }}"
+    resource_tags: {
+      "Type": "Public",
+      "AZ": "{{ vpc_az_a }}",
+      "Name": "{{ namespace }}-public-subnet"
+    }
+    #Public Subnet 2
+  - cidr: "{{ vpc_class }}.1.0/24"
+    az: "{{ vpc_az_b }}"
+    resource_tags: {
+      "Type": "Public",
+      "AZ": "{{ vpc_az_b }}",
+      "Name": "{{ namespace }}-public-subnet"
+    }
+    #Private Subnet 1
+  - cidr: "{{ vpc_class }}.3.0/24"
+    az: "{{ vpc_az_a }}"
+    resource_tags: {
+      "Type": "Private",
+      "AZ": "{{ vpc_az_a }}",
+      "Name": "{{ namespace }}-private-subnet"
+    }
+    #Private Subnet 2
+  - cidr: "{{ vpc_class }}.4.0/24"
+    az: "{{ vpc_az_b }}"
+    resource_tags: {
+      "Type": "Private",
+      "AZ": "{{ vpc_az_b }}",
+      "Name": "{{ namespace }}-private-subnet"
+    }

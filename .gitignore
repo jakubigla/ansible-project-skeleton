@@ -2,3 +2,4 @@
 .vagrant
 roles/external/*
 !.gitkeep
+config.local*

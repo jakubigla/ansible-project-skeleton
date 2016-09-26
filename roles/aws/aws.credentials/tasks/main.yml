@@ -17,5 +17,7 @@
   with_items:
     - boto
 
+- debug: var=aws_access_key_id
+
 - name: Copy boto config template
-  template: src=boto.j2 dest="/home/vagrant/.boto" owner={{ remote_user }} group={{ remote_user }}
+  template: src=boto.j2 dest="/home/vagrant/.boto" owner=vagrant group=vagrant

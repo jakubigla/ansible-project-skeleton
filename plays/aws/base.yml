@@ -1,0 +1,6 @@
+- name: Setup Virtual Private Cloud
+  hosts: aws_builder
+  connection: local
+  gather_facts: False
+  roles:
+    - aws.vpc

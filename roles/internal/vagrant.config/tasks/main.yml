@@ -1,0 +1,2 @@
+- name: Change directory on login
+  shell: "echo \"cd /vagrant\" >> /home/vagrant/.bashrc"
